@@ -11,6 +11,8 @@ const Header = () => {
   };
   const [searchQuery, setSearchQuery] = useState(""); //even state is const we can change bcz it is a new variable every time it re-render
   const [suggestions, setSuggestions] = useState()
+
+  //debounce
   useEffect(() => {
     //make an functon for api call after every key press
     //but if the difference between 2 key press is<200 decline that api call
