@@ -1,6 +1,7 @@
 import React from 'react'
 
 const VideoCard = ({video}) => {
+  console.log(video);
     const {snippet, statistics} = video
     const {channelTitle, title, thumbnails} = snippet
   return (

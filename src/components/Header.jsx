@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { Link } from "react-router-dom";
 import { AUTO_SUGGEST_API } from "../utils/constants";
+import store from './../utils/store';
+import { addInCache } from "../utils/searchSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const toggleHamburgerHandler = () => {
     dispatch(toggleMenu());
   };
+
   const [searchQuery, setSearchQuery] = useState(""); //even state is const we can change bcz it is a new variable every time it re-render
   const [suggestions, setSuggestions] = useState()
+  const [showSuggestion, setShowSuggestion] = useState(false)
+
+  const searchCache = useSelector(store=>store.search)
 
   //debounce
   useEffect(() => {
     //make an functon for api call after every key press
     //but if the difference between 2 key press is<200 decline that api call
     console.log(searchQuery);
-    let timer;
+    let timer
     if (searchQuery !== "") {
       timer = setTimeout(() => {
-        getSearchSuggestion();
+        if(searchCache[searchQuery]){
+          setSuggestions(searchCache[searchQuery])
+        }else{
+          getSearchSuggestion();
+        }
       }, 300);
     }
 
@@ -36,7 +46,11 @@ const Header = () => {
     const data = await fetch(AUTO_SUGGEST_API + searchQuery);
     const json = await data.json();
     console.log(json[1]);
+
     setSuggestions(json[1]);
+    dispatch(addInCache({
+      [searchQuery]: json[1]
+    }))
   };
 
   return (
@@ -64,6 +78,8 @@ const Header = () => {
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onBlur={()=>{setShowSuggestion(false)}}
+            onFocus={()=>{setShowSuggestion(true)}}
           />
           <button className="p-2 rounded-r-full px-4 bg-slate-300 border border-gray-700">
             🔍
@@ -71,7 +87,7 @@ const Header = () => {
         </div>
         
         {
-          suggestions && (searchQuery!=="") && <div className="absolute bg-white p-1 shadow-lg rounded-md border border-gray-300 w-96">
+          showSuggestion && suggestions && <div className="absolute bg-white p-1 shadow-lg rounded-md border border-gray-300 w-96">
           <ul>
             {suggestions.map((item, i)=>{
               return <li key={i} className="px-2 py-1 m-1 cursor-pointer hover:bg-slate-200 rounded-md">{item}</li>
