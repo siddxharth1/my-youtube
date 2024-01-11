@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useParams, useSearchParams } from "react-router-dom";
 import { API_KEY } from "../utils/constants";
+import CommentsContainer from "./CommentsContainer";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const WatchPage = () => {
         {videoData?.items[0]?.snippet?.localized?.description}
       </p>
       <h1 className="font-semibold text-xl text-number">{Number(videoData?.items[0]?.statistics?.commentCount)?.toLocaleString()} Comment</h1>
+      <CommentsContainer/>
     </div>
   );
 };
