@@ -4,3 +4,5 @@ export const FETCH_URL = " https://youtube.googleapis.com/youtube/v3/videos?part
 
 // AIzaSyDaYOvtKdmH5SKCKnQZ4uBzuJKGmvzu0jE
 export const AUTO_SUGGEST_API = "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q="
+
+export const LIVE_CHAT_COUNT = 30 //calculate according to device capabality
