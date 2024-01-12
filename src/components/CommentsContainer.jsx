@@ -31,14 +31,16 @@ const commentData = [
                 name: " User 1 r1 r2 r1",
                 commentText:
                   "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ullam nam exercitationem asperiores? Explicabo fugit amet ",
-              },
+                reply:[]
+                },
             ],
           },
           {
-            name: " User 1 r1 r3",
+            name: "User 1 r1 r3",
             commentText:
               "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ullam nam exercitationem asperiores? Explicabo fugit amet ",
-          },
+            reply:[]
+            },
         ],
       },
     ],
@@ -78,7 +80,8 @@ const commentData = [
     name: " User 4",
     commentText:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ullam nam exercitationem asperiores? Explicabo fugit amet ",
-  },
+      reply:[]
+    },
 ];
 
 const CommentList = ({ comments }) => {
@@ -98,7 +101,7 @@ const CommentList = ({ comments }) => {
 
 const CommentsContainer = () => {
   return (<>
-      <input type="text" className="border border-gray-400 w-full rounded-lg p-2 my-2 outline-none focus:border-gray-600"  placeholder="Comment"/>
+      <input type="text" className="border border-gray-400 w-full rounded-md p-2 my-2 outline-none focus:border-gray-800"  placeholder="Add a comment.."/>
       <CommentList comments={commentData} />
   </>
   );

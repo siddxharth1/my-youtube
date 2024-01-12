@@ -9,6 +9,7 @@ const WatchPage = () => {
   const dispatch = useDispatch();
   const [searchpParams] = useSearchParams();
   const [videoData, setVideoData] = useState();
+  const [showMore, setShowMore] = useState(true)
   const videoId = searchpParams.get("v");
 
   useEffect(() => {
@@ -41,14 +42,29 @@ const WatchPage = () => {
         {videoData?.items[0]?.snippet?.localized?.title}
       </h1>
       <div className="flex justify-between w-11/12">
-        <h1>View: {Number(videoData?.items[0]?.statistics?.viewCount).toLocaleString()}</h1>
-        <h1>Likes: {Number(videoData?.items[0]?.statistics?.likeCount).toLocaleString()}</h1>
+        <h1>
+          View:{" "}
+          {Number(videoData?.items[0]?.statistics?.viewCount).toLocaleString()}
+        </h1>
+        <h1>
+          Likes:{" "}
+          {Number(videoData?.items[0]?.statistics?.likeCount).toLocaleString()}
+        </h1>
       </div>
-      <p className="w-[928px] my-3 px-5 p-1 rounded-lg bg-slate-200 overflow-hidden line-clamp-2  text-gray-500">
-        {videoData?.items[0]?.snippet?.localized?.description}
-      </p>
-      <h1 className="font-semibold text-xl text-number">{Number(videoData?.items[0]?.statistics?.commentCount)?.toLocaleString()} Comment</h1>
-      <CommentsContainer/>
+      <div className="relative">
+        {showMore ? <button className={"absolute right-0 bottom-0 text-gray-500 mr-12 px-2 py-1 bg-slate-200 hover:text-black"} onClick={()=>setShowMore(false)}>show more..</button>: <button className={"absolute bottom-0 text-gray-500 ml-3 px-2 py-1 bg-slate-200 hover:text-black"} onClick={()=>setShowMore(true)}>show less</button>}
+        
+        <p className={`w-[928px] my-3 px-5 p-1 rounded-lg bg-slate-200 ${(showMore)? ` overflow-hidden line-clamp-2` : `pb-7`}  `}>
+          {videoData?.items[0]?.snippet?.localized?.description}
+        </p>
+      </div>
+      <h1 className="font-semibold text-xl text-number">
+        {Number(
+          videoData?.items[0]?.statistics?.commentCount
+        )?.toLocaleString()}{" "}
+        Comment
+      </h1>
+      <CommentsContainer />
     </div>
   );
 };
