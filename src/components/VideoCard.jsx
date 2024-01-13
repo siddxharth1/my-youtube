@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
-  // console.log(video);
-  const { snippet, id} = video;
+  console.log(video);
+  const { snippet, id, statistics} = video;
   const { channelTitle, title, thumbnails } = snippet;
 
   const videoId = ((typeof(id)) == "object") ? id?.videoId : id
@@ -20,9 +20,10 @@ const VideoCard = ({ video }) => {
           src={thumbnails.medium.url}
           alt="thumbnail"
         ></img>
+        {isPlaylist && <div className="-translate-y-8 p-1 top-10 bg-white opacity-85">Playlist</div> }
         <h1 className="font-bold">{title}</h1>
         <h1 className="">{channelTitle}</h1>
-        {/* <span>{statistics.viewCount} views</span> */}
+        {!isPlaylist && statistics?.viewCount && <span>{statistics?.viewCount} views</span>}
       </div>
     </Link>
   );

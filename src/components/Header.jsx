@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { AUTO_SUGGEST_API } from "../utils/constants";
 import store from "./../utils/store";
 import { addInCache } from "../utils/searchSlice";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -58,15 +59,19 @@ const Header = () => {
   return (
     <div className="flex px-7 py-4 justify-between items-center shadow-lg">
       <div className="flex h-8">
-        <img
+        {/* <img
           className=" mr-3 cursor-pointer"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/128px-Hamburger_icon.svg.png"
           alt=""
           onClick={toggleHamburgerHandler}
-        />
+        /> */}
+        <span className="mr-3 p-1 cursor-pointer rounded-full hover:bg-gray-200">
+          <RxHamburgerMenu size={25} onClick={toggleHamburgerHandler} />
+        </span>
 
         <Link to="/">
-          <img className="h-8"
+          <img
+            className="h-8"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/128px-Logo_of_YouTube_%282015-2017%29.svg.png"
             alt=""
           />
@@ -75,7 +80,7 @@ const Header = () => {
       <div className="relative">
         <div>
           <input
-            className="p-2 px-5 rounded-l-full w-96 border border-gray-700 outline-none"
+            className="p-2 px-5  rounded-l-full w-96 border border-gray-700 outline-none"
             type="text"
             name=""
             id=""
@@ -84,14 +89,17 @@ const Header = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             onBlur={() => {
               setTimeout(() => {
-                setShowSuggestion(false)
+                setShowSuggestion(false);
               }, 200);
             }}
             onFocus={() => {
               setShowSuggestion(true);
             }}
           />
-          <Link className="p-2 rounded-r-full px-4 bg-slate-300 border border-gray-700" to={"/results?search_query="+searchQuery}>
+          <Link
+            className="p-2 rounded-r-full px-4 bg-slate-300  border-2 border-gray-700"
+            to={"/results?search_query=" + searchQuery}
+          >
             🔍
           </Link>
         </div>
@@ -101,8 +109,8 @@ const Header = () => {
             <ul className="flex flex-col">
               {suggestions.map((item, i) => {
                 return (
-                  <Link 
-                    to={"/results?search_query="+item}
+                  <Link
+                    to={"/results?search_query=" + item}
                     className="px-2 py-1 m-1 cursor-pointer hover:bg-slate-200 rounded-md"
                   >
                     {item}
