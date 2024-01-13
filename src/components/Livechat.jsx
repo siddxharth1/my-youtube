@@ -22,12 +22,15 @@ const Livechat = () => {
 
   const liveChatData = useSelector((store) => store.liveChat.messages);
 
-  const chatMessage = useRef()
+  const chatMessage = useRef();
 
-  const handleAddLiveChat=()=>{
-    dispatch(addMessage({name: "Me", message: chatMessage.current.value}))
-    chatMessage.current.value = ""
-  }
+  const handleAddLiveChat = (e) => {
+    e.preventDefault();
+    if (chatMessage.current.value !== "") {
+      dispatch(addMessage({ name: "Me", message: chatMessage.current.value }));
+      chatMessage.current.value = "";
+    }
+  };
 
   return (
     <div className="border border-gray-400 bg-gray-100  rounded-lg w-full ">
@@ -41,7 +44,10 @@ const Livechat = () => {
         })}
       </div>
 
-      <div className="m-1 p-1 pl-3 bg-gray-200 border border-gray-600 rounded-lg flex">
+      <form
+        className="m-1 p-1 pl-3 bg-gray-200 border border-gray-600 rounded-lg flex"
+        onSubmit={handleAddLiveChat}
+      >
         <input
           type="text"
           className=" w-full bg-transparent outline-none "
@@ -49,10 +55,10 @@ const Livechat = () => {
           id=""
           ref={chatMessage}
         />
-        <button className="border border-gray-700 p-1 rounded bg-slate-400" onClick={()=>handleAddLiveChat()}>
+        <button className="border border-gray-700 p-1 rounded bg-slate-400">
           Send
         </button>
-      </div>
+      </form>
     </div>
   );
 };

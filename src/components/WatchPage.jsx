@@ -12,6 +12,7 @@ const WatchPage = () => {
   const [searchpParams] = useSearchParams();
   const [videoData, setVideoData] = useState();
   const videoId = searchpParams.get("v");
+  console.log(videoId)
 
   useEffect(() => {
     getVideoData();

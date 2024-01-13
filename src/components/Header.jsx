@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { Link } from "react-router-dom";
 import { AUTO_SUGGEST_API } from "../utils/constants";
-import store from './../utils/store';
+import store from "./../utils/store";
 import { addInCache } from "../utils/searchSlice";
 
 const Header = () => {
@@ -13,22 +13,22 @@ const Header = () => {
   };
 
   const [searchQuery, setSearchQuery] = useState(""); //even state is const we can change bcz it is a new variable every time it re-render
-  const [suggestions, setSuggestions] = useState()
-  const [showSuggestion, setShowSuggestion] = useState(false)
+  const [suggestions, setSuggestions] = useState();
+  const [showSuggestion, setShowSuggestion] = useState(false);
 
-  const searchCache = useSelector(store=>store.search)
+  const searchCache = useSelector((store) => store.search);
 
   //debounce
   useEffect(() => {
     //make an functon for api call after every key press
     //but if the difference between 2 key press is<200 decline that api call
     console.log(searchQuery);
-    let timer
+    let timer;
     if (searchQuery !== "") {
       timer = setTimeout(() => {
-        if(searchCache[searchQuery]){
-          setSuggestions(searchCache[searchQuery])
-        }else{
+        if (searchCache[searchQuery]) {
+          setSuggestions(searchCache[searchQuery]);
+        } else {
           getSearchSuggestion();
         }
       }, 300);
@@ -48,9 +48,11 @@ const Header = () => {
     console.log(json[1]);
 
     setSuggestions(json[1]);
-    dispatch(addInCache({
-      [searchQuery]: json[1]
-    }))
+    dispatch(
+      addInCache({
+        [searchQuery]: json[1],
+      })
+    );
   };
 
   return (
@@ -63,10 +65,12 @@ const Header = () => {
           onClick={toggleHamburgerHandler}
         />
 
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/128px-Logo_of_YouTube_%282015-2017%29.svg.png"
-          alt=""
-        />
+        <Link to="/">
+          <img className="h-8"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/128px-Logo_of_YouTube_%282015-2017%29.svg.png"
+            alt=""
+          />
+        </Link>
       </div>
       <div className="relative">
         <div>
@@ -78,24 +82,37 @@ const Header = () => {
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onBlur={()=>{setShowSuggestion(false)}}
-            onFocus={()=>{setShowSuggestion(true)}}
+            onBlur={() => {
+              setTimeout(() => {
+                setShowSuggestion(false)
+              }, 200);
+            }}
+            onFocus={() => {
+              setShowSuggestion(true);
+            }}
           />
-          <button className="p-2 rounded-r-full px-4 bg-slate-300 border border-gray-700">
+          <Link className="p-2 rounded-r-full px-4 bg-slate-300 border border-gray-700" to={"/results?search_query="+searchQuery}>
             🔍
-          </button>
+          </Link>
         </div>
-        
-        {
-          showSuggestion && suggestions && <div className="absolute bg-white p-1 shadow-lg rounded-md border border-gray-300 w-96">
-          <ul>
-            {suggestions.map((item, i)=>{
-              return <li key={i} className="px-2 py-1 m-1 cursor-pointer hover:bg-slate-200 rounded-md">{item}</li>
-            })}
-          </ul>
-        </div>
-        }
-        
+
+        {showSuggestion && suggestions && (
+          <div className="absolute bg-white p-1 shadow-lg rounded-md border border-gray-300 w-96">
+            <ul className="flex flex-col">
+              {suggestions.map((item, i) => {
+                return (
+                  <Link 
+                    to={"/results?search_query="+item}
+                    // key={i}
+                    className="px-2 py-1 m-1 cursor-pointer hover:bg-slate-200 rounded-md"
+                  >
+                    {item}
+                  </Link>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
 
       <button>

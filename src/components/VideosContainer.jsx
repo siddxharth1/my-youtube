@@ -21,17 +21,17 @@ const VideosContainer = () => {
     }
 
     async function getVideoData(){
-        const data = await fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key="+API_KEY+"&pageToken="+nextPageToken)
+        const data = await fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=10&regionCode=IN&key="+API_KEY+"&pageToken="+nextPageToken)
         const json = await data.json()
         console.log(json)
-        setVideoList((prevData) => [...prevData ,...json.items])
         setNextPageToken(json.nextPageToken)
+        setVideoList((prevData) => [...prevData ,...json.items])
     }
     if(!videoList) return null
   return (
-    <div className='flex flex-wrap'>
+    <div className='flex flex-wrap mb-40'>
         {videoList.map((video)=>{
-            return <Link className='m-2'  to={"/watch?v="+ video.id}> <VideoCard video={video}/></Link>
+            return <VideoCard video={video}/>
         })}
     </div>
   )
