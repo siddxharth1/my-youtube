@@ -35,6 +35,7 @@ const VideosContainer = () => {
         {videoList.map((video, i)=>{
             return <VideoCard key={video?.id+""+i} video={video}/>
         })}
+        <Shimmer/>
     </div>
   )
 }
