@@ -18,9 +18,11 @@ const SearchResult = () => {
         console.log(json.items);
         setSearchItemVideo(json.items);
     }
+    if(searchItemVideo.length === 0) return ;
+
   return <div className="flex flex-wrap">
-    {searchItemVideo.length>0 && searchItemVideo.map((item)=>{
-        return <VideoCard video={item}/>
+    {searchItemVideo.length>0 && searchItemVideo.map((item, i)=>{
+        return <VideoCard key={item.id+i} video={item}/>
     }) }
   </div>;
 };

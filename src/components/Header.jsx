@@ -22,9 +22,9 @@ const Header = () => {
   useEffect(() => {
     //make an functon for api call after every key press
     //but if the difference between 2 key press is<200 decline that api call
-    console.log(searchQuery);
     let timer;
     if (searchQuery !== "") {
+      console.log(searchQuery);
       timer = setTimeout(() => {
         if (searchCache[searchQuery]) {
           setSuggestions(searchCache[searchQuery]);
@@ -103,7 +103,6 @@ const Header = () => {
                 return (
                   <Link 
                     to={"/results?search_query="+item}
-                    // key={i}
                     className="px-2 py-1 m-1 cursor-pointer hover:bg-slate-200 rounded-md"
                   >
                     {item}

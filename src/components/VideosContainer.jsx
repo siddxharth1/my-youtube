@@ -29,9 +29,9 @@ const VideosContainer = () => {
     }
     if(!videoList) return null
   return (
-    <div className='flex flex-wrap mb-40'>
-        {videoList.map((video)=>{
-            return <VideoCard video={video}/>
+    <div className='flex flex-wrap pb-40'>
+        {videoList.map((video, i)=>{
+            return <VideoCard key={video?.id+""+i} video={video}/>
         })}
     </div>
   )
