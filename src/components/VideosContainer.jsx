@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FETCH_URL, API_KEY } from '../utils/constants'
 import VideoCard from './VideoCard'
 import { Link } from 'react-router-dom'
+import Shimmer from './Shimmer'
 
 const VideosContainer = () => {
     const [videoList, setVideoList] = useState([])
@@ -29,7 +30,8 @@ const VideosContainer = () => {
     }
     if(!videoList) return null
   return (
-    <div className='flex flex-wrap pb-40'>
+    <div className='flex flex-wrap pb-40 dark:bg-zinc-900 dark:text-white'>
+        {videoList.length===0 && <Shimmer/>}
         {videoList.map((video, i)=>{
             return <VideoCard key={video?.id+""+i} video={video}/>
         })}

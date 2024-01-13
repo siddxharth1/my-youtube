@@ -16,7 +16,7 @@ const SideNav = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
 
   return (
-    <div className=" shadow-xl p-3 ">
+    <div className=" shadow-xl p-3 text-black dark:text-white dark:bg-zinc-900">
       <ul>
         <Link to="/" className="flex gap-2 p-2 hover:bg-gray-300 rounded-lg">
           <MdHomeFilled size={20} />

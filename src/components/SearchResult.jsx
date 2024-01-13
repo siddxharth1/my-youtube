@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {  useSearchParams } from "react-router-dom";
 import { API_KEY } from "../utils/constants";
 import VideoCard from './VideoCard';
+import Shimmer from "./Shimmer";
 
 const SearchResult = () => {
     const[searchItemVideo, setSearchItemVideo] = useState([]);
@@ -18,9 +19,10 @@ const SearchResult = () => {
         console.log(json.items);
         setSearchItemVideo(json.items);
     }
-    if(searchItemVideo.length === 0) return ;
+    if(!searchItemVideo) return ;
 
-  return <div className="flex flex-wrap">
+  return <div className="flex flex-wrap dark:bg-zinc-900 dark:text-white">
+    {searchItemVideo.length===0 && <Shimmer/>}
     {searchItemVideo.length>0 && searchItemVideo.map((item, i)=>{
         return <VideoCard key={item.id+i} video={item}/>
     }) }

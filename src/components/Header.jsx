@@ -6,12 +6,10 @@ import { AUTO_SUGGEST_API } from "../utils/constants";
 import store from "./../utils/store";
 import { addInCache } from "../utils/searchSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { toggleTheme } from "../utils/themeSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const toggleHamburgerHandler = () => {
-    dispatch(toggleMenu());
-  };
 
   const [searchQuery, setSearchQuery] = useState(""); //even state is const we can change bcz it is a new variable every time it re-render
   const [suggestions, setSuggestions] = useState();
@@ -40,8 +38,25 @@ const Header = () => {
       clearTimeout(timer);
     };
   }, [searchQuery]);
-
   //return inside will be executed when the previous component destroy and the new component will be made with new useEffect call(and this happen when the useEffect dependency changes or reconcialiaton process happens)
+
+  const toggleHamburgerHandler = () => {
+    dispatch(toggleMenu());
+  };
+
+  const themeData = useSelector((store) => store.theme.isDarkTheme);
+  useEffect(()=>{
+    if(themeData){
+      document.documentElement.classList.add("dark")
+    }
+    else{
+      document.documentElement.classList.remove("dark")
+    }
+  }, [themeData])
+  const toggleThemeHandler = () => {
+    dispatch(toggleTheme());
+  };
+
 
   const getSearchSuggestion = async () => {
     const data = await fetch(AUTO_SUGGEST_API + searchQuery);
@@ -57,7 +72,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex px-7 py-4 justify-between items-center shadow-lg">
+    <div className="flex px-7 py-4 justify-between items-center shadow-lg dark:bg-zinc-900">
       <div className="flex h-8">
         {/* <img
           className=" mr-3 cursor-pointer"
@@ -66,7 +81,7 @@ const Header = () => {
           onClick={toggleHamburgerHandler}
         /> */}
         <span className="mr-3 p-1 cursor-pointer rounded-full hover:bg-gray-200">
-          <RxHamburgerMenu size={25} onClick={toggleHamburgerHandler} />
+          <RxHamburgerMenu size={25} className="text-black dark:text-white" onClick={toggleHamburgerHandler} />
         </span>
 
         <Link to="/">
@@ -80,10 +95,8 @@ const Header = () => {
       <div className="relative">
         <div>
           <input
-            className="p-2 px-5  rounded-l-full w-96 border border-gray-700 outline-none"
+            className="p-2 px-5 bg-transparent rounded-l-full w-96 border border-gray-700 outline-none dark:text-white"
             type="text"
-            name=""
-            id=""
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -105,13 +118,13 @@ const Header = () => {
         </div>
 
         {showSuggestion && suggestions && (
-          <div className="absolute bg-white p-1 shadow-lg rounded-md border border-gray-300 w-96">
+          <div className="absolute bg-white p-1 shadow-lg rounded-md border border-gray-300 dark:bg-zinc-900 dark:text-white w-96">
             <ul className="flex flex-col">
               {suggestions.map((item, i) => {
                 return (
                   <Link
                     to={"/results?search_query=" + item}
-                    className="px-2 py-1 m-1 cursor-pointer hover:bg-slate-200 rounded-md"
+                    className="px-2 py-1 m-1 cursor-pointer dark:hover:bg-zinc-700 hover:bg-slate-200 rounded-md"
                   >
                     {item}
                   </Link>
@@ -122,13 +135,21 @@ const Header = () => {
         )}
       </div>
 
-      <button>
-        <img
-          className="h-10"
-          src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-          alt=""
-        />
-      </button>
+      <div className="flex">
+        <button
+          className="mr-3 bg-slate-300 w-10 h-10 rounded-full"
+          onClick={toggleThemeHandler}
+        >
+          O
+        </button>
+        <button>
+          <img
+            className="h-10"
+            src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+            alt=""
+          />
+        </button>
+      </div>
     </div>
   );
 };

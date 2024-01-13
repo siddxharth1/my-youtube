@@ -5,7 +5,7 @@ import VideosContainer from './VideosContainer'
 const MainContainer = () => {
   return (
     <div className='inline'>
-        <Category/>
+        {/* <Category/> */}
         <VideosContainer/>
     </div>
   )

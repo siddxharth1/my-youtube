@@ -33,7 +33,7 @@ const Livechat = () => {
   };
 
   return (
-    <div className="border border-gray-400 bg-gray-100  rounded-lg w-full ">
+    <div className="border border-gray-400 bg-gray-100  rounded-lg w-full dark:bg-zinc-900">
       <h1 className="font-bold text-xl border-b-[1px] p-3 border-gray-400">
         live chat
       </h1>
@@ -45,12 +45,12 @@ const Livechat = () => {
       </div>
 
       <form
-        className="m-1 p-1 pl-3 bg-gray-200 border border-gray-600 rounded-lg flex"
+        className="m-1 p-1 pl-3 bg-gray-200 border border-gray-600 rounded-lg flex dark:bg-zinc-700"
         onSubmit={handleAddLiveChat}
       >
         <input
           type="text"
-          className=" w-full bg-transparent outline-none "
+          className=" w-full bg-transparent outline-none"
           name=""
           id=""
           ref={chatMessage}

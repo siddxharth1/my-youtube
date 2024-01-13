@@ -29,7 +29,7 @@ const WatchPage = () => {
   };
 
   return (
-    <div className="m-3 w-full">
+    <div className="p-3 w-full dark:bg-zinc-900 dark:text-white">
       <div className="flex gap-2 w-full">
         <div>
           <iframe

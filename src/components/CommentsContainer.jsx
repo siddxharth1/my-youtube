@@ -87,10 +87,10 @@ const commentData = [
 const CommentList = ({ comments }) => {
   return comments.map((comment) => {
     return (
-      <div className="">
+      <div className="dark:bg-zinc-900">
         <Comment data={comment} />
         {comment.replies && (
-          <div className="pl-3 border border-l-black border-t-0 border-r-0 border-b-0">
+          <div className="pl-3 border border-l-black dark:border-l-white border-t-0 border-r-0 border-b-0">
             <CommentList comments={comment.replies} />
           </div>
         )}
@@ -101,7 +101,7 @@ const CommentList = ({ comments }) => {
 
 const CommentsContainer = () => {
   return (<>
-      <input type="text" className="border border-gray-400 w-full rounded-md p-2 my-2 outline-none focus:border-gray-800"  placeholder="Add a comment.."/>
+      <input type="text" className="border border-gray-400 w-full rounded-md p-2 my-2 outline-none focus:border-gray-800 dark:bg-zinc-700"  placeholder="Add a comment.."/>
       <CommentList comments={commentData} />
   </>
   );

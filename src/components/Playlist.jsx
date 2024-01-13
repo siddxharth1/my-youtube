@@ -31,12 +31,12 @@ const Playlist = () => {
   };
 
   return (
-    <div className="flex flex-col p-5">
+    <div className="flex flex-col p-5 dark:bg-zinc-900 dark:text-white">
       <div className="">
         <h1 className="font-bold text-4xl">{playlistDetail.channelTitle}</h1>
         <p className="text-gray-600">{playlistDetail.description}</p>
       </div>
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-3 px-10">
         {videoData.length > 0 &&
           videoData.map((item) => {
             return <VideoCard video={item} />;

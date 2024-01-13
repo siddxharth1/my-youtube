@@ -8,7 +8,7 @@ const Body = () => {
   return (
     <>
     <Header/>
-    <div className='flex'>
+    <div className='flex dark:bg-zinc-900'>
       <SideNav/>
       <Outlet/>
     </div>
