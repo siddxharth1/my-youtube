@@ -16,7 +16,7 @@ const VideosContainer = () => {
     }, [])
 
     const HandleInfiniteScroll =()=>{
-        if(document.documentElement.scrollHeight <= document.documentElement.scrollTop + window.innerHeight+1){
+        if(document.documentElement.scrollHeight <= document.documentElement.scrollTop + window.innerHeight+500){
             getVideoData()
         }
     }

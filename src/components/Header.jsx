@@ -7,6 +7,7 @@ import store from "./../utils/store";
 import { addInCache } from "../utils/searchSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { toggleTheme } from "../utils/themeSlice";
+import { MdOutlineLightMode, MdOutlineDarkMode  } from "react-icons/md";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -137,10 +138,10 @@ const Header = () => {
 
       <div className="flex">
         <button
-          className="mr-3 bg-slate-300 w-10 h-10 rounded-full"
+          className="mr-3 p-2 bg-slate-300 w-10 h-10 rounded-full transition-all"
           onClick={toggleThemeHandler}
         >
-          O
+          {themeData ? <MdOutlineLightMode size={24}/> : <MdOutlineDarkMode size={24}/>}
         </button>
         <button>
           <img
