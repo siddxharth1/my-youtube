@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const getInitialTheme = () => {
-    // Check if the theme is stored in local storage
     const storedTheme = localStorage.getItem("theme");
-    
-    // If theme is stored, return it; otherwise, return the system theme
     return storedTheme ? JSON.parse(storedTheme) : window.matchMedia("(prefers-color-scheme: dark)").matches;
   };
 
