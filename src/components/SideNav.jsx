@@ -18,37 +18,37 @@ const SideNav = () => {
   return (
     <div className=" shadow-xl p-3 text-black dark:text-white dark:bg-zinc-900">
       <ul>
-        <Link to="/" className="flex gap-2 p-2 hover:bg-gray-300 rounded-lg">
+        <Link to="/" className="flex gap-2 p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">
           <MdHomeFilled size={20} />
           {isMenuOpen && <span>Home</span>}
         </Link>
         <Link
           to="results?search_query=shots"
-          className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg"
+          className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700"
         >
           <SiYoutubeshorts size={20} />
           {isMenuOpen && <span>Shorts</span>}
         </Link>
-        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg">
+        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">
           <MdSubscriptions size={20} />
           {isMenuOpen && <span>Subscriptions</span>}
         </Link>
       </ul>
       <hr className="border-1 border-gray-500 my-3" />
       <ul>
-        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg">
+        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">
           <MdOutlineVideoLibrary size={20} />
           {isMenuOpen && <span>Library</span>}
         </Link>
-        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg">
+        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">
           <MdHistory size={20} />
           {isMenuOpen && <span>History</span>}
         </Link>
-        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg">
+        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">
           <GoVideo size={20} />
           {isMenuOpen && <span>Your Video</span>}
         </Link>
-        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg">
+        <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">
           <MdWatchLater size={20} />
           {isMenuOpen && <span>Watch Later </span>}
         </Link>
@@ -59,10 +59,10 @@ const SideNav = () => {
           <ul>
             <h1 className="font-bold">Subscriptions</h1>
             <ul>
-              <li className="p-2 hover:bg-gray-300 rounded-lg">Name1</li>
-              <li className="p-2 hover:bg-gray-300 rounded-lg">Name2</li>
-              <li className="p-2 hover:bg-gray-300 rounded-lg">Name3</li>
-              <li className="p-2 hover:bg-gray-300 rounded-lg">Name4</li>
+              <li className="p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">Name1</li>
+              <li className="p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">Name2</li>
+              <li className="p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">Name3</li>
+              <li className="p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">Name4</li>
             </ul>
           </ul>
         </>

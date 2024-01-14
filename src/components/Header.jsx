@@ -82,8 +82,8 @@ const Header = () => {
           alt=""
           onClick={toggleHamburgerHandler}
         /> */}
-        <span className="mr-3 p-1 cursor-pointer rounded-full hover:bg-gray-200">
-          <RxHamburgerMenu size={25} className="text-black dark:text-white" onClick={toggleHamburgerHandler} />
+        <span className="mr-3 p-1 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700">
+          <RxHamburgerMenu size={25} className="text-black dark:text-white " onClick={toggleHamburgerHandler} />
         </span>
 
         <Link to="/">
