@@ -14,7 +14,7 @@ const SearchResult = () => {
     }, [searchQuery])
 
     const getSearchedData = async()=>{
-        const data = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchQuery}&key=`+API_KEY)
+        const data = await fetch('https://corsproxy.org/?'+encodeURIComponent(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&key=${API_KEY}&q=${searchQuery}`))
         const json = await data.json()
         console.log(json.items);
         setSearchItemVideo(json.items);

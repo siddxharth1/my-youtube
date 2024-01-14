@@ -7,6 +7,7 @@ import store from "./../utils/store";
 import { addInCache } from "../utils/searchSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { toggleTheme } from "../utils/themeSlice";
+import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineLightMode, MdOutlineDarkMode  } from "react-icons/md";
 
 const Header = () => {
@@ -60,7 +61,7 @@ const Header = () => {
 
 
   const getSearchSuggestion = async () => {
-    const data = await fetch(AUTO_SUGGEST_API + searchQuery);
+    const data = await fetch('https://corsproxy.org/?'+encodeURIComponent(AUTO_SUGGEST_API + searchQuery));
     const json = await data.json();
     console.log(json[1]);
 
@@ -125,6 +126,7 @@ const Header = () => {
                 return (
                   <Link
                     to={"/results?search_query=" + item}
+                    key={item}
                     className="px-2 py-1 m-1 cursor-pointer dark:hover:bg-zinc-700 hover:bg-slate-200 rounded-md"
                   >
                     {item}
@@ -144,11 +146,12 @@ const Header = () => {
           {themeData ? <MdOutlineLightMode size={24}/> : <MdOutlineDarkMode size={24}/>}
         </button>
         <button>
-          <img
+          {/* <img
             className="h-10"
             src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
             alt=""
-          />
+          /> */}
+          <FaUserCircle size={35} className="dark:text-white"/>
         </button>
       </div>
     </div>

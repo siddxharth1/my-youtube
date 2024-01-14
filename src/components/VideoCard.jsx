@@ -20,7 +20,7 @@ const VideoCard = ({ video }) => {
           src={thumbnails.medium.url}
           alt="thumbnail"
         ></img>
-        {isPlaylist && <div className="-translate-y-8 p-1 top-10 bg-white opacity-85">Playlist</div> }
+        {isPlaylist && <div className="-translate-y-8 p-1 top-10 bg-white opacity-85 dark:text-black font-semibold">Playlist</div> }
         <h1 className="font-bold">{title}</h1>
         <h1 className="">{channelTitle}</h1>
         {!isPlaylist && statistics?.viewCount && <span>{statistics?.viewCount} views</span>}

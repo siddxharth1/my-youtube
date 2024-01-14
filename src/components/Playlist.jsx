@@ -39,7 +39,7 @@ const Playlist = () => {
       <div className="grid grid-cols-3 px-10">
         {videoData.length > 0 &&
           videoData.map((item) => {
-            return <VideoCard video={item} />;
+            return <VideoCard key={item.id} video={item} />;
           })}
       </div>
     </div>

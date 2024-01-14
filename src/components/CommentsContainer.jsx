@@ -85,9 +85,9 @@ const commentData = [
 ];
 
 const CommentList = ({ comments }) => {
-  return comments.map((comment) => {
+  return comments.map((comment, i) => {
     return (
-      <div className="dark:bg-zinc-900">
+      <div className="dark:bg-zinc-900" key={i}>
         <Comment data={comment} />
         {comment.replies && (
           <div className="pl-3 border border-l-black dark:border-l-white border-t-0 border-r-0 border-b-0">
