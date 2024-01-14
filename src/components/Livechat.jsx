@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LivechatMessage from "./LivechatMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../utils/liveChatSlice";
@@ -6,19 +6,22 @@ import store from "../utils/store";
 
 const Livechat = () => {
   const dispatch = useDispatch();
-  let counter = 0;
+  const [startLiveChat, setStartLiveChat] = useState(true);
+  let counter = useRef(0)
   useEffect(() => {
-    // const i = setInterval(() => {
-    //   dispatch(
-    //     addMessage({
-    //       name: "sidharth" + counter,
-    //       message: "shadhsadi" + counter,
-    //     })
-    //   );
-    //   counter++;
-    // }, 1000);
-    // return () => clearInterval(i);
-  }, []);
+    if (startLiveChat) {
+      const i = setInterval(() => {
+        dispatch(
+          addMessage({
+            name: "sidharth" + counter.current,
+            message: "shadhsadi" + counter.current,
+          })
+        );
+        counter.current++;
+      }, 1000);
+      return () => clearInterval(i);
+    }
+  }, [startLiveChat]);
 
   const liveChatData = useSelector((store) => store.liveChat.messages);
 
@@ -32,11 +35,30 @@ const Livechat = () => {
     }
   };
 
+  const liveChatHandler = () => {
+    setStartLiveChat(!startLiveChat);
+  };
+
   return (
     <div className="border border-gray-400 bg-gray-100  rounded-lg w-full dark:bg-zinc-900">
-      <h1 className="font-bold text-xl border-b-[1px] p-3 border-gray-400">
-        live chat
-      </h1>
+      <div className=" p-3 border-b-[1px] border-gray-400 flex justify-between">
+        <h1 className="font-bold text-xl">live chat</h1>
+        {startLiveChat ? (
+          <button
+            className="border border-black rounded px-2"
+            onClick={() => liveChatHandler()}
+          >
+            Stop live chat
+          </button>
+        ) : (
+          <button
+            className="border border-black rounded px-2"
+            onClick={() => liveChatHandler()}
+          >
+            Start live chat
+          </button>
+        )}
+      </div>
 
       <div className="p-2 h-[450px] overflow-auto flex flex-col-reverse">
         {liveChatData.map((chat) => {
