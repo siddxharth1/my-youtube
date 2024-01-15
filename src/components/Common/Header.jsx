@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMenu } from "../utils/appSlice";
+import { toggleMenu } from "../../utils/store/slices/appSlice";
 import { Link } from "react-router-dom";
-import { AUTO_SUGGEST_API } from "../utils/constants";
-import store from "./../utils/store";
-import { addInCache } from "../utils/searchSlice";
+import { AUTO_SUGGEST_API } from "../../utils/constants/constants";
+import store from "../../utils/store/store";
+import { addInCache } from "../../utils/store/slices/searchSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { toggleTheme } from "../utils/themeSlice";
+import { toggleTheme } from "../../utils/store/slices/themeSlice";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineLightMode, MdOutlineSearch , MdOutlineDarkMode ,MdOutlinePlayCircleFilled  } from "react-icons/md";
 

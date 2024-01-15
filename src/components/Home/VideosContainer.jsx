@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { FETCH_URL, API_KEY } from '../utils/constants'
-import VideoCard from './VideoCard'
+import { FETCH_URL, API_KEY } from '../../utils/constants/constants'
+import VideoCard from '../Common/VideoCard'
 import { Link } from 'react-router-dom'
-import Shimmer from './Shimmer'
+import Shimmer from '../Common/Shimmer'
 
 const VideosContainer = () => {
     const [videoList, setVideoList] = useState([])

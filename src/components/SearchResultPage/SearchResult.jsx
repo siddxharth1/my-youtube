@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {  useSearchParams } from "react-router-dom";
-import { API_KEY } from "../utils/constants";
-import VideoCard from './VideoCard';
-import Shimmer from "./Shimmer";
+import { API_KEY } from "../../utils/constants/constants";
+import VideoCard from '../Common/VideoCard';
+import Shimmer from "../Common/Shimmer";
 
 const SearchResult = () => {
     const[searchItemVideo, setSearchItemVideo] = useState([]);

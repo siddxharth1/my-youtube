@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LIVE_CHAT_COUNT } from "./constants";
+import { LIVE_CHAT_COUNT } from "../../constants/constants";
 
 const liveChatSlice = createSlice({
     name: "liveChat",

@@ -1,7 +1,7 @@
 import React from 'react'
-import SideNav from './SideNav'
+import SideNav from './/Common/SideNav'
 import { Outlet } from 'react-router-dom'
-import Header from './Header'
+import Header from './Common/Header'
 
 const Body = () => {
 

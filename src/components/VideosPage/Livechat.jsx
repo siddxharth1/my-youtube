@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import LivechatMessage from "./LivechatMessage";
 import { useDispatch, useSelector } from "react-redux";
-import { addMessage } from "../utils/liveChatSlice";
-import store from "../utils/store";
+import { addMessage } from "../../utils/store/slices/liveChatSlice";
+import store from "../../utils/store/store";
 
 const Livechat = () => {
   const dispatch = useDispatch();

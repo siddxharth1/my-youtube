@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import appSlice from "./appSlice";
-import searchSlice from "./searchSlice";
-import liveChatSlice from "./liveChatSlice";
-import themeSlice from "./themeSlice";
+import appSlice from "./slices/appSlice";
+import searchSlice from "./slices/searchSlice";
+import liveChatSlice from "./slices/liveChatSlice";
+import themeSlice from "./slices/themeSlice";
 
 const store = configureStore({
     reducer:{

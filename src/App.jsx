@@ -1,13 +1,13 @@
 import { useState } from "react";
-import Header from "./components/Header";
+import Header from "./components/Common/Header";
 import Body from "./components/Body";
 import { Provider } from "react-redux";
-import store from "./utils/store";
+import store from "./utils/store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import WatchPage from "./components/WatchPage";
-import MainContainer from "./components/MainContainer";
-import SearchResult from "./components/SearchResult";
-import Playlist from "./components/Playlist";
+import WatchPage from "./components/VideosPage/WatchPage";
+import MainContainer from "./components/Home/MainContainer";
+import SearchResult from "./components/SearchResultPage/SearchResult";
+import Playlist from "./components/PlaylistPage/Playlist";
 
 function App() {
   const appRouter = createBrowserRouter([

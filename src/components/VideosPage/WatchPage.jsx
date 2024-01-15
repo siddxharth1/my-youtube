@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { closeMenu } from "../utils/appSlice";
+import { closeMenu } from "../../utils/store/slices/appSlice";
 import { useParams, useSearchParams } from "react-router-dom";
-import { API_KEY } from "../utils/constants";
+import { API_KEY } from "../../utils/constants/constants";
 import CommentsContainer from "./CommentsContainer";
 import Livechat from "./Livechat";
 import VideoDescription from "./VideoDescription";
