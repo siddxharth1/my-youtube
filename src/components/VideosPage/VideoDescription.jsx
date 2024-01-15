@@ -6,6 +6,8 @@ const VideoDescription = ({desc}) => {
     <div className="relative ">
             {showMore ? (
               <button
+              aria-label="showmore"
+          role="button"
                 className={
                   "absolute right-0 bottom-0 text-gray-500 mr-6 px-2 py-1 dark:bg-zinc-700 bg-slate-200 hover:text-black "
                 }
@@ -15,6 +17,8 @@ const VideoDescription = ({desc}) => {
               </button>
             ) : (
               <button
+              aria-label="showless"
+          role="button"
                 className={
                   "absolute bottom-0 text-gray-500 ml-3 px-2 py-1 bg-slate-200 dark:bg-zinc-700 hover:text-black"
                 }

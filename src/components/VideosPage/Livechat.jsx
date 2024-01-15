@@ -45,6 +45,8 @@ const Livechat = () => {
         <h1 className="font-bold text-xl">live chat</h1>
         {startLiveChat ? (
           <button
+          aria-label="livechat"
+          role="button"
             className="border border-black rounded px-2"
             onClick={() => liveChatHandler()}
           >
@@ -52,6 +54,8 @@ const Livechat = () => {
           </button>
         ) : (
           <button
+          aria-label="livechat"
+          role="button"
             className="border border-black rounded px-2"
             onClick={() => liveChatHandler()}
           >
@@ -77,7 +81,7 @@ const Livechat = () => {
           id=""
           ref={chatMessage}
         />
-        <button className="border border-gray-700 p-1 rounded bg-slate-400">
+        <button aria-label="send" role="button" className="border border-gray-700 p-1 rounded bg-slate-400">
           Send
         </button>
       </form>

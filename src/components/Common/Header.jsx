@@ -81,7 +81,7 @@ const Header = () => {
         </span>
 
         <Link to="/">
-          <MdOutlinePlayCircleFilled size={35} color="red"/>
+          <MdOutlinePlayCircleFilled aria-label="logo" size={35} color="red"/>
         </Link>
       </div>
       <div className="relative">
@@ -130,9 +130,11 @@ const Header = () => {
 
         <button
           className="mr-3 p-2 bg-slate-300 w-10 h-10 rounded-full transition-all"
+          aria-label="Themechange"
+          role="button"
           onClick={toggleThemeHandler}
         >
-          {themeData ? <MdOutlineLightMode size={24}/> : <MdOutlineDarkMode size={24}/>}
+          {themeData ? <MdOutlineLightMode aria-label="light-mode" size={24}/> : <MdOutlineDarkMode aria-label="dark-mode" size={24}/>}
         </button>
         
     </div>
