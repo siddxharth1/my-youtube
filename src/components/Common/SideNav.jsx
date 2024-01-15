@@ -17,7 +17,7 @@ const SideNav = () => {
 
   return (
     <div className=" shadow-xl p-3 text-black dark:text-white dark:bg-zinc-900">
-      <ul>
+      <div>
         <Link to="/" className="flex gap-2 p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">
           <MdHomeFilled size={20} />
           {isMenuOpen && <span>Home</span>}
@@ -33,9 +33,9 @@ const SideNav = () => {
           <MdSubscriptions size={20} />
           {isMenuOpen && <span>Subscriptions</span>}
         </Link>
-      </ul>
+      </div>
       <hr className="border-1 border-gray-500 my-3" />
-      <ul>
+      <div>
         <Link className="flex p-2 gap-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">
           <MdOutlineVideoLibrary size={20} />
           {isMenuOpen && <span>Library</span>}
@@ -52,11 +52,10 @@ const SideNav = () => {
           <MdWatchLater size={20} />
           {isMenuOpen && <span>Watch Later </span>}
         </Link>
-      </ul>
+      </div>
       {isMenuOpen && (
         <>
           <hr className="border-1 border-gray-500 my-3" />
-          <ul>
             <h1 className="font-bold">Subscriptions</h1>
             <ul>
               <li className="p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">Name1</li>
@@ -64,7 +63,6 @@ const SideNav = () => {
               <li className="p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">Name3</li>
               <li className="p-2 hover:bg-gray-300 rounded-lg dark:hover:bg-zinc-700">Name4</li>
             </ul>
-          </ul>
         </>
       )}
     </div>
