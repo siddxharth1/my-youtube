@@ -8,7 +8,7 @@ import { addInCache } from "../utils/searchSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { toggleTheme } from "../utils/themeSlice";
 import { FaUserCircle } from "react-icons/fa";
-import { MdOutlineLightMode, MdOutlineDarkMode  } from "react-icons/md";
+import { MdOutlineLightMode, MdOutlineSearch , MdOutlineDarkMode ,MdOutlinePlayCircleFilled  } from "react-icons/md";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -76,28 +76,18 @@ const Header = () => {
   return (
     <div className="flex px-7 py-4 justify-between items-center shadow-lg dark:bg-zinc-900">
       <div className="flex h-8">
-        {/* <img
-          className=" mr-3 cursor-pointer"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/128px-Hamburger_icon.svg.png"
-          alt=""
-          onClick={toggleHamburgerHandler}
-        /> */}
         <span className="mr-3 p-1 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700">
           <RxHamburgerMenu size={25} className="text-black dark:text-white " onClick={toggleHamburgerHandler} />
         </span>
 
         <Link to="/">
-          <img
-            className="h-8"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/128px-Logo_of_YouTube_%282015-2017%29.svg.png"
-            alt=""
-          />
+          <MdOutlinePlayCircleFilled size={35} color="red"/>
         </Link>
       </div>
       <div className="relative">
         <div>
           <input
-            className="p-2 px-5 bg-transparent rounded-l-full w-96 border border-gray-700 outline-none dark:text-white"
+            className="p-2 px-5 bg-transparent rounded-l-full w-[30vw] max-w-96 border border-gray-700 outline-none dark:text-white "
             type="text"
             placeholder="Search"
             value={searchQuery}
@@ -138,22 +128,13 @@ const Header = () => {
         )}
       </div>
 
-      <div className="flex">
         <button
           className="mr-3 p-2 bg-slate-300 w-10 h-10 rounded-full transition-all"
           onClick={toggleThemeHandler}
         >
           {themeData ? <MdOutlineLightMode size={24}/> : <MdOutlineDarkMode size={24}/>}
         </button>
-        <button>
-          {/* <img
-            className="h-10"
-            src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-            alt=""
-          /> */}
-          <FaUserCircle size={35} className="dark:text-white"/>
-        </button>
-      </div>
+        
     </div>
   );
 };
