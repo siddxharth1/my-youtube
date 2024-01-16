@@ -21,7 +21,7 @@ const VideoCard = ({ video }) => {
           alt="thumbnail"
         ></img>
         {isPlaylist && <div className="-translate-y-8 p-1 top-10 bg-white opacity-85 dark:text-black font-semibold">Playlist</div> }
-        <h1 className="font-bold">{title}</h1>
+        <h1 className="font-bold whitespace-nowrap overflow-hidden text-ellipsis">{title}</h1>
         <h1 className="">{channelTitle}</h1>
         {!isPlaylist && statistics?.viewCount && <span>{Number(statistics?.viewCount).toLocaleString()} views</span>}
       </div>

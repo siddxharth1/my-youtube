@@ -7,6 +7,7 @@ import Shimmer from '../Common/Shimmer'
 const VideosContainer = () => {
     const [videoList, setVideoList] = useState([])
     const[nextPageToken, setNextPageToken] = useState('')
+    console.log(videoList);
     useEffect(()=>{
         getVideoData()
         document.addEventListener('scroll', HandleInfiniteScroll)
