@@ -80,7 +80,10 @@ const WatchPage = () => {
         </div>
 
         <div className="w-full">
-          <Livechat />
+          {(videoData?.items[0]?.snippet?.liveBroadcastContent === "live") && <Livechat />}
+          <div>
+
+          </div>
         </div>
       </div>
 

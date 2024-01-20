@@ -23,7 +23,7 @@ const VideosContainer = () => {
 
     async function getVideoData(){
         console.count("api call")
-        const data = await fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=10&regionCode=IN&key="+API_KEY+"&pageToken="+nextPageToken)
+        const data = await fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=IN&key="+API_KEY+"&pageToken="+nextPageToken)
         const json = await data.json()
         console.log(json)
         setNextPageToken(json.nextPageToken)
