@@ -27,6 +27,7 @@ const Playlist = () => {
       `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`
     );
     const json = await data.json();
+    console.log(json);
     setVideoData(json.items);
   };
 
@@ -36,9 +37,10 @@ const Playlist = () => {
         <h1 className="font-bold text-4xl">{playlistDetail.channelTitle}</h1>
         <p className="text-gray-600">{playlistDetail.description}</p>
       </div>
-      <div className="grid grid-cols-3 px-10">
+      <div className="flex flex-wrap px-10">
         {videoData.length > 0 &&
           videoData.map((item) => {
+            console.log(item)
             return <VideoCard key={item.id} video={item} />;
           })}
       </div>

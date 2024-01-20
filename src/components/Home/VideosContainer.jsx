@@ -7,7 +7,6 @@ import Shimmer from '../Common/Shimmer'
 const VideosContainer = () => {
     const [videoList, setVideoList] = useState([])
     const[nextPageToken, setNextPageToken] = useState('')
-    console.log(videoList);
     useEffect(()=>{
         getVideoData()
         document.addEventListener('scroll', HandleInfiniteScroll)
@@ -17,12 +16,13 @@ const VideosContainer = () => {
     }, [])
 
     const HandleInfiniteScroll =()=>{
-        if(document.documentElement.scrollHeight <= document.documentElement.scrollTop + window.innerHeight+500){
+        if(document.documentElement.scrollHeight <= document.documentElement.scrollTop + window.innerHeight+1){
             getVideoData()
         }
     }
 
     async function getVideoData(){
+        console.count("api call")
         const data = await fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=10&regionCode=IN&key="+API_KEY+"&pageToken="+nextPageToken)
         const json = await data.json()
         console.log(json)

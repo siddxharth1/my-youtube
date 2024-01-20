@@ -12,7 +12,7 @@ const WatchPage = () => {
   const [searchpParams] = useSearchParams();
   const [videoData, setVideoData] = useState();
   const videoId = searchpParams.get("v");
-  console.log(videoId)
+  console.log(videoId);
 
   useEffect(() => {
     getVideoData();
@@ -42,23 +42,33 @@ const WatchPage = () => {
             <h1 className="font-bold text-xl">
               {videoData?.items[0]?.snippet?.localized?.title}
             </h1>
-            <div className="flex justify-between w-11/12">
-              <h1>
-                View:{" "}
-                {Number(
-                  videoData?.items[0]?.statistics?.viewCount
-                ).toLocaleString()}
-              </h1>
-              <h1>
-                Likes:{" "}
-                {Number(
-                  videoData?.items[0]?.statistics?.likeCount
-                ).toLocaleString()}
-              </h1>
+            <div className="flex justify-between my-4 w-11/12">
+              <div>
+                {/* <img src={`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videoData?.items[0]?.snippet?.channelId}&key=${API_KEY}`} alt="" /> */}
+                <h1 className="font-bold">
+                  {videoData?.items[0]?.snippet?.channelTitle}
+                </h1>
+              </div>
+              <div className="flex gap-4">
+                <h1>
+                  View:{" "}
+                  {Number(
+                    videoData?.items[0]?.statistics?.viewCount
+                  ).toLocaleString()}
+                </h1>
+                <h1>
+                  Likes:{" "}
+                  {Number(
+                    videoData?.items[0]?.statistics?.likeCount
+                  ).toLocaleString()}
+                </h1>
+              </div>
             </div>
           </div>
 
-          <VideoDescription desc={videoData?.items[0]?.snippet?.localized?.description}/>
+          <VideoDescription
+            desc={videoData?.items[0]?.snippet?.localized?.description}
+          />
 
           <h1 className="font-semibold text-xl text-number">
             {Number(

@@ -7,7 +7,8 @@ import store from "../../utils/store/store";
 const Livechat = () => {
   const dispatch = useDispatch();
   const [startLiveChat, setStartLiveChat] = useState(true);
-  let counter = useRef(0)
+  const [showLiveChat, setShowLiveChat] = useState(true);
+  let counter = useRef(0);
   useEffect(() => {
     if (startLiveChat) {
       const i = setInterval(() => {
@@ -24,7 +25,6 @@ const Livechat = () => {
   }, [startLiveChat]);
 
   const liveChatData = useSelector((store) => store.liveChat.messages);
-
   const chatMessage = useRef();
 
   const handleAddLiveChat = (e) => {
@@ -35,18 +35,22 @@ const Livechat = () => {
     }
   };
 
+  const toggleShowChat = () => {
+    setShowLiveChat(!showLiveChat);
+  };
+
   const liveChatHandler = () => {
     setStartLiveChat(!startLiveChat);
   };
 
   return (
-    <div className="border border-gray-400 bg-gray-100  rounded-lg w-full dark:bg-zinc-900">
+    <div className=" border border-gray-400 bg-gray-100  rounded-lg w-full dark:bg-zinc-900">
       <div className=" p-3 border-b-[1px] border-gray-400 flex justify-between">
         <h1 className="font-bold text-xl">live chat</h1>
         {startLiveChat ? (
           <button
-          aria-label="livechat"
-          role="button"
+            aria-label="livechat"
+            role="button"
             className="border border-black rounded px-2"
             onClick={() => liveChatHandler()}
           >
@@ -54,8 +58,8 @@ const Livechat = () => {
           </button>
         ) : (
           <button
-          aria-label="livechat"
-          role="button"
+            aria-label="livechat"
+            role="button"
             className="border border-black rounded px-2"
             onClick={() => liveChatHandler()}
           >
@@ -64,27 +68,43 @@ const Livechat = () => {
         )}
       </div>
 
-      <div className="p-2 h-[450px] overflow-auto flex flex-col-reverse">
-        {liveChatData.map((chat) => {
-          return <LivechatMessage {...chat} />;
-        })}
-      </div>
+      {showLiveChat && (
+        <>
+          <div className="p-2 h-[450px] overflow-auto flex flex-col-reverse">
+            {liveChatData.map((chat) => {
+              return <LivechatMessage {...chat} />;
+            })}
+          </div>
 
-      <form
-        className="m-1 p-1 pl-3 bg-gray-200 border border-gray-600 rounded-lg flex dark:bg-zinc-700"
-        onSubmit={handleAddLiveChat}
-      >
-        <input
-          type="text"
-          className=" w-full bg-transparent outline-none"
-          name=""
-          id=""
-          ref={chatMessage}
-        />
-        <button aria-label="send" role="button" className="border border-gray-700 p-1 rounded bg-slate-400">
-          Send
+          <form
+            className="m-1 p-1 pl-3 bg-gray-200 border border-gray-600 rounded-lg flex dark:bg-zinc-700"
+            onSubmit={handleAddLiveChat}
+          >
+            <input
+              type="text"
+              className=" w-full bg-transparent outline-none"
+              name=""
+              id=""
+              ref={chatMessage}
+            />
+            <button
+              aria-label="send"
+              role="button"
+              className="border border-gray-700 p-1 rounded bg-slate-400"
+            >
+              Send
+            </button>
+          </form>
+        </>
+      )}
+      <div className="m-2">
+        <button
+          className="p-1 rounded-full w-full border border-white hover:bg-zinc-800"
+          onClick={toggleShowChat}
+        >
+          Show live chat
         </button>
-      </form>
+      </div>
     </div>
   );
 };

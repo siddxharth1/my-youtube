@@ -3,12 +3,25 @@ import { Link } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
   // console.log(video);
-  const { snippet, id, statistics} = video;
+  const { snippet, id, statistics, kind} = video;
   const { channelTitle, title, thumbnails } = snippet;
+  let videoId;
 
-  const videoId = ((typeof(id)) == "object") ? id?.videoId : id
   const isPlaylist = id?.kind == "youtube#playlist"
   const playlistID = id?.playlistId;
+
+  switch(kind){
+    case "youtube#video":
+      videoId = (videoId) ? videoId : id;
+      break;
+    case "youtube#playlistItem":
+      videoId = snippet.resourceId.videoId;
+      break;
+    case "youtube#searchResult":
+      videoId = id.videoId;
+      break;
+  }
+
   return (
     <Link
       className="m-2"
