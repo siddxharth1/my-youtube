@@ -1,46 +1,60 @@
-import React, { useEffect, useState } from 'react'
-import { FETCH_URL, API_KEY } from '../../utils/constants/constants'
-import VideoCard from '../Common/VideoCard'
-import { Link } from 'react-router-dom'
-import Shimmer from '../Common/Shimmer'
+import React, { useEffect, useState } from "react";
+import { FETCH_URL, API_KEY } from "../../utils/constants/constants";
+import VideoCard from "../Common/VideoCard";
+import { Link } from "react-router-dom";
+import Shimmer from "../Common/Shimmer";
 
 const VideosContainer = () => {
-    const [videoList, setVideoList] = useState([])
-    // const[nextPageTokenCode, setNextPageTokenCode] = useState('')
-    let nextPageTokenCode = ''
-    useEffect(()=>{
-        getVideoData()
-        document.addEventListener('scroll', HandleInfiniteScroll)
-        return()=>{
-                window.removeEventListener('scroll', HandleInfiniteScroll);
-        }
-    }, [])
+  const [videoList, setVideoList] = useState([]);
+  const [nextPageToken, setNextPageToken] = useState("");
+  const [loading, setLoading] = useState(false)
 
-    const HandleInfiniteScroll =()=>{
-        if(document.documentElement.scrollHeight <= document.documentElement.scrollTop + window.innerHeight+1){
-            getVideoData()
-        }
-    }
+  useEffect(() => {
+    getVideoData();
+  }, []);
 
-    async function getVideoData(){
-        console.count("api call")
-        const data = await fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=IN&key="+API_KEY+"&pageToken="+nextPageTokenCode)
-        const json = await data.json()
-        console.log(json)
-        nextPageTokenCode = json.nextPageToken
-        // setNextPageTokenCode(json.nextPageToken)
-        setVideoList((prevData) => [...prevData ,...json.items])
+  useEffect(() => {
+    document.addEventListener("scroll", HandleInfiniteScroll, true);
+    return () => {
+      document.removeEventListener("scroll", HandleInfiniteScroll, true);
+    };
+  }, [nextPageToken]);
+
+  const HandleInfiniteScroll = () => {
+    if (
+      window.innerHeight + Math.round(document.documentElement.scrollTop) >=
+      document.documentElement.offsetHeight - 1
+    ) {
+        setLoading(true)
+      getVideoData();
     }
-    if(!videoList) return null
+  };
+
+  const getVideoData = async () => {
+    
+    try {
+      const url = nextPageToken !== "" ? FETCH_URL + "&pageToken=" + nextPageToken : FETCH_URL;
+      const data = await fetch(url);
+      const json = await data.json();
+      console.log(json);
+      setNextPageToken(json.nextPageToken);
+      setVideoList([...videoList, ...json?.items]);
+    } catch (e) {
+      console.log(e);
+    }
+    finally{
+        setLoading(false)
+    }
+  };
+  if(!videoList.length) return <div className="flex"><Shimmer /></div> 
   return (
-    <div className='flex flex-wrap pb-40 dark:bg-zinc-900 dark:text-white'>
-        {videoList.length===0 && <Shimmer/>}
-        {videoList.map((video, i)=>{
-            return <VideoCard key={video?.id+""+i} video={video}/>
-        })}
-        <Shimmer/>
+    <div className="flex flex-wrap pb-40 dark:bg-zinc-900 dark:text-white">
+      {videoList.map((video) => {
+        return <VideoCard key={video?.id} video={video} />;
+      })}
+      {loading && <Shimmer/>}
     </div>
-  )
-}
+  );
+};
 
-export default VideosContainer
+export default VideosContainer;
