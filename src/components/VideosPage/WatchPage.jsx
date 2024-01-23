@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../utils/store/slices/appSlice";
 import { useParams, useSearchParams } from "react-router-dom";
-import { API_KEY } from "../../utils/constants/constants";
+import { API_KEY, AUTO_SUGGEST_API } from "../../utils/constants/constants";
 import CommentsContainer from "./CommentsContainer";
 import Livechat from "./Livechat";
 import VideoDescription from "./VideoDescription";
+import VideoCard from './../Common/VideoCard';
 
 const WatchPage = () => {
   const dispatch = useDispatch();
   const [searchpParams] = useSearchParams();
-  const [videoData, setVideoData] = useState();
   const videoId = searchpParams.get("v");
+  const [videoData, setVideoData] = useState();
+  const [suggestVideo, setSuggestVideo] = useState([]);
   console.log(videoId);
 
   useEffect(() => {
@@ -26,6 +28,20 @@ const WatchPage = () => {
     const json = await data.json();
     console.log(json);
     setVideoData(json);
+    getSuggestVideo(json.items[0].snippet.localized.title);
+  };
+
+  const getSuggestVideo = async (title) => {
+    console.log(title);
+    const data = await fetch(
+      "https://corsproxy.org/?" +
+        encodeURIComponent(
+          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&key=${API_KEY}&q=${title}`
+        )
+    );
+    const json = await data.json();
+    setSuggestVideo([...json.items]);
+    console.log(json.items);
   };
 
   return (
@@ -80,9 +96,14 @@ const WatchPage = () => {
         </div>
 
         <div className="w-full">
-          {(videoData?.items[0]?.snippet?.liveBroadcastContent === "live") && <Livechat />}
-          <div>
-
+          {videoData?.items[0]?.snippet?.liveBroadcastContent === "live" && (
+            <Livechat />
+          )}
+          <div className="w-96 flex flex-col ">
+            {suggestVideo.length > 0 &&
+              suggestVideo.slice(1).map((item) => {
+                return <VideoCard video={item}/>
+              })}
           </div>
         </div>
       </div>

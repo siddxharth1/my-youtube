@@ -74,7 +74,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex px-7 py-4 justify-between items-center shadow-lg dark:bg-zinc-900">
+    <div className="flex px-7 sticky top-0 py-4 bg-white justify-between items-center shadow-lg dark:bg-zinc-900">
       <div className="flex h-8">
         <span className="mr-3 p-1 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700">
           <RxHamburgerMenu size={25} className="text-black dark:text-white " onClick={toggleHamburgerHandler} />
