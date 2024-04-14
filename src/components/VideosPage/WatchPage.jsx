@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../utils/store/slices/appSlice";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { API_KEY, AUTO_SUGGEST_API } from "../../utils/constants/constants";
 import CommentsContainer from "./CommentsContainer";
 import Livechat from "./Livechat";
 import VideoDescription from "./VideoDescription";
-import VideoCard from './../Common/VideoCard';
+import VideoCard from "./../Common/VideoCard";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
-  const [searchpParams] = useSearchParams();
+  const location = useLocation();
+  const searchpParams = new URLSearchParams(location.search);
   const videoId = searchpParams.get("v");
   const [videoData, setVideoData] = useState();
   const [suggestVideo, setSuggestVideo] = useState([]);
@@ -34,10 +35,7 @@ const WatchPage = () => {
   const getSuggestVideo = async (title) => {
     console.log(title);
     const data = await fetch(
-      "https://corsproxy.org/?" +
-        encodeURIComponent(
-          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&key=${API_KEY}&q=${title}`
-        )
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&key=${API_KEY}&q=${title}`
     );
     const json = await data.json();
     setSuggestVideo([...json.items]);
@@ -102,7 +100,7 @@ const WatchPage = () => {
           <div className="w-96 flex flex-col ">
             {suggestVideo.length > 0 &&
               suggestVideo.slice(1).map((item) => {
-                return <VideoCard video={item}/>
+                return <VideoCard video={item} />;
               })}
           </div>
         </div>

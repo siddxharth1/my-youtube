@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { API_KEY } from "../../utils/constants/constants";
 import VideoCard from "../Common/VideoCard";
+import convertTextToLinks from "../../utils/functions";
 
 const Playlist = () => {
   const [paramsData] = useSearchParams();
@@ -35,12 +36,14 @@ const Playlist = () => {
     <div className="flex flex-col p-5 dark:bg-zinc-900 dark:text-white">
       <div className="">
         <h1 className="font-bold text-4xl">{playlistDetail.channelTitle}</h1>
-        <p className="text-gray-600">{playlistDetail.description}</p>
+        <p className="text-gray-600">
+          {convertTextToLinks(playlistDetail.description)}
+        </p>
       </div>
       <div className="flex flex-wrap px-10">
         {videoData.length > 0 &&
           videoData.map((item) => {
-            console.log(item)
+            console.log(item);
             return <VideoCard key={item.id} video={item} />;
           })}
       </div>

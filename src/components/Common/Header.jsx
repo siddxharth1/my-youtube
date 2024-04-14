@@ -8,7 +8,12 @@ import { addInCache } from "../../utils/store/slices/searchSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { toggleTheme } from "../../utils/store/slices/themeSlice";
 import { FaUserCircle } from "react-icons/fa";
-import { MdOutlineLightMode, MdOutlineSearch , MdOutlineDarkMode ,MdOutlinePlayCircleFilled  } from "react-icons/md";
+import {
+  MdOutlineLightMode,
+  MdOutlineSearch,
+  MdOutlineDarkMode,
+  MdOutlinePlayCircleFilled,
+} from "react-icons/md";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -47,21 +52,19 @@ const Header = () => {
   };
 
   const themeData = useSelector((store) => store.theme.isDarkTheme);
-  useEffect(()=>{
-    if(themeData){
-      document.documentElement.classList.add("dark")
+  useEffect(() => {
+    if (themeData) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
-    else{
-      document.documentElement.classList.remove("dark")
-    }
-  }, [themeData])
+  }, [themeData]);
   const toggleThemeHandler = () => {
     dispatch(toggleTheme());
   };
 
-
   const getSearchSuggestion = async () => {
-    const data = await fetch('https://corsproxy.org/?'+encodeURIComponent(AUTO_SUGGEST_API + searchQuery));
+    const data = await fetch(AUTO_SUGGEST_API + searchQuery);
     const json = await data.json();
     console.log(json[1]);
 
@@ -77,11 +80,15 @@ const Header = () => {
     <div className="flex px-7 sticky top-0 py-4 bg-white justify-between items-center shadow-lg dark:bg-zinc-900">
       <div className="flex h-8">
         <span className="mr-3 p-1 cursor-pointer rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700">
-          <RxHamburgerMenu size={25} className="text-black dark:text-white " onClick={toggleHamburgerHandler} />
+          <RxHamburgerMenu
+            size={25}
+            className="text-black dark:text-white "
+            onClick={toggleHamburgerHandler}
+          />
         </span>
 
         <Link to="/">
-          <MdOutlinePlayCircleFilled aria-label="logo" size={35} color="red"/>
+          <MdOutlinePlayCircleFilled aria-label="logo" size={35} color="red" />
         </Link>
       </div>
       <div className="relative">
@@ -128,15 +135,18 @@ const Header = () => {
         )}
       </div>
 
-        <button
-          className="mr-3 p-2 bg-slate-300 w-10 h-10 rounded-full transition-all"
-          aria-label="Themechange"
-          role="button"
-          onClick={toggleThemeHandler}
-        >
-          {themeData ? <MdOutlineLightMode aria-label="light-mode" size={24}/> : <MdOutlineDarkMode aria-label="dark-mode" size={24}/>}
-        </button>
-        
+      <button
+        className="mr-3 p-2 bg-slate-300 w-10 h-10 rounded-full transition-all"
+        aria-label="Themechange"
+        role="button"
+        onClick={toggleThemeHandler}
+      >
+        {themeData ? (
+          <MdOutlineLightMode aria-label="light-mode" size={24} />
+        ) : (
+          <MdOutlineDarkMode aria-label="dark-mode" size={24} />
+        )}
+      </button>
     </div>
   );
 };

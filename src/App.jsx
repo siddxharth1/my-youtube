@@ -10,14 +10,16 @@ import Error from "./components/Error";
 // import SearchResult from "./components/SearchResultPage/SearchResult";
 // import Playlist from "./components/PlaylistPage/Playlist";
 
-const SearchResult = lazy(()=> import("./components/SearchResultPage/SearchResult"))
-const Playlist = lazy(()=> import('./components/PlaylistPage/Playlist'))
+const SearchResult = lazy(() =>
+  import("./components/SearchResultPage/SearchResult")
+);
+const Playlist = lazy(() => import("./components/PlaylistPage/Playlist"));
 function App() {
   const appRouter = createBrowserRouter([
     {
       path: "/",
       element: <Body />,
-      errorElement:<Error/>,
+      errorElement: <Error />,
       children: [
         {
           path: "/",
@@ -25,26 +27,35 @@ function App() {
         },
         {
           path: "watch",
-          element: <WatchPage/>
+          element: <WatchPage />,
         },
         {
           path: "results",
-          element: <Suspense><SearchResult/></Suspense> 
+          element: (
+            <Suspense>
+              <SearchResult />
+            </Suspense>
+          ),
         },
         {
           path: "playlist",
-          element: <Suspense><Playlist/></Suspense>
-        }
+          element: (
+            <Suspense>
+              <Playlist />
+            </Suspense>
+          ),
+        },
+        {
+          path: "*",
+          element: <Error />,
+        },
       ],
     },
   ]);
 
   return (
     <Provider store={store}>
-      
-      <RouterProvider router={appRouter}>
-        
-      </RouterProvider>
+      <RouterProvider router={appRouter}></RouterProvider>
     </Provider>
   );
 }
